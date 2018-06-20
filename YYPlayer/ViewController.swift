@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     var playerItem:AVPlayerItem!
     var avplayer:AVPlayer!
     var playerLayer:AVPlayerLayer!
+    var link: CADisplayLink!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,13 +46,41 @@ class ViewController: UIViewController {
         // 位置放在最底下
         self.playerView.layer.insertSublayer(playerLayer, at: 0)
         self.playerView.backgroundColor = UIColor.red
+        self.playerView.delegate = self
+        
         print("here")
+        self.link = CADisplayLink.init(target: self, selector: #selector(update))
+        self.link.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
+    }
+    
+    @objc func update() -> Void {
+        let currentTime = CMTimeGetSeconds(self.avplayer.currentTime())
+        let totalTime = TimeInterval.init(playerItem.duration.value)/TimeInterval.init(playerItem.duration.timescale)
+        
+        // 播放时间
+        let timeStr = "\(formatPlayTime(second: currentTime))/\(formatPlayTime(second: totalTime))"
+        playerView.timeLabel.text = timeStr
+        
+        // 不滑动的时候更新进度条
+        if self.playerView.isSliding == false {
+            playerView.slider.value = Float(currentTime/totalTime)
+        }
     }
     
     /// 移除观察者
     deinit {
         playerItem.removeObserver(self, forKeyPath: "loadedTimeRanges")
         playerItem.removeObserver(self, forKeyPath: "status")
+    }
+    
+    /// 秒 -> 时间字符串
+    func formatPlayTime(second: TimeInterval) -> String {
+        if second.isNaN {
+            return "00:00"
+        }
+        let min: Int = Int(second/60)
+        let sec: Int = Int(second.truncatingRemainder(dividingBy: 60))
+        return String(format: "%02d:%02d", min, sec)
     }
     
     /// 监听事件
@@ -70,3 +99,20 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController: YYPlayerViewDelegate {
+    
+    //  滑动条事件
+    func yyplayer(_ player: YYPlayerView, sliderTouchUpOut slider: UISlider) {
+       
+        // 当视频状态为AVPlayerStatusReadyToPlay时才处理
+        if avplayer.status == .readyToPlay {
+            let duration = slider.value * Float(CMTimeGetSeconds(avplayer.currentItem!.duration))
+            let seekTime = CMTimeMake(Int64(duration), 1)
+            
+            // 指定视频位置
+            self.avplayer.seek(to: seekTime) { (b) in
+                player.isSliding = false
+            }
+        }
+    }
+}

@@ -13,6 +13,8 @@
 		75959E0120DA389A0033237E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75959E0020DA389A0033237E /* Assets.xcassets */; };
 		75959E0420DA389A0033237E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75959E0220DA389A0033237E /* LaunchScreen.storyboard */; };
 		75959E0C20DA395A0033237E /* YYPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75959E0B20DA395A0033237E /* YYPlayerView.swift */; };
+		75959E0E20DA472D0033237E /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75959E0D20DA472D0033237E /* SnapKit.framework */; };
+		B258CBB97264EBDD232D19AF /* Pods_YYPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B59882BA084005D15173F226 /* Pods_YYPlayer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,10 @@
 		75959E0320DA389A0033237E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		75959E0520DA389A0033237E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75959E0B20DA395A0033237E /* YYPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YYPlayerView.swift; sourceTree = "<group>"; };
+		75959E0D20DA472D0033237E /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FFC5D23CCBCB348A09452EE /* Pods-YYPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YYPlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-YYPlayer/Pods-YYPlayer.release.xcconfig"; sourceTree = "<group>"; };
+		B59882BA084005D15173F226 /* Pods_YYPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YYPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4CE5D7417850590D0AC4D76 /* Pods-YYPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YYPlayer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YYPlayer/Pods-YYPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +37,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75959E0E20DA472D0033237E /* SnapKit.framework in Frameworks */,
+				B258CBB97264EBDD232D19AF /* Pods_YYPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		065458AA4AF1B13A5182165B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75959E0D20DA472D0033237E /* SnapKit.framework */,
+				B59882BA084005D15173F226 /* Pods_YYPlayer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		75959DED20DA38980033237E = {
 			isa = PBXGroup;
 			children = (
 				75959DF820DA38980033237E /* YYPlayer */,
 				75959DF720DA38980033237E /* Products */,
+				CFAE38BE0307EF54C165E6D2 /* Pods */,
+				065458AA4AF1B13A5182165B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +75,24 @@
 		75959DF820DA38980033237E /* YYPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				75959E0B20DA395A0033237E /* YYPlayerView.swift */,
 				75959DF920DA38980033237E /* AppDelegate.swift */,
 				75959DFB20DA38980033237E /* ViewController.swift */,
 				75959DFD20DA38980033237E /* Main.storyboard */,
 				75959E0020DA389A0033237E /* Assets.xcassets */,
 				75959E0220DA389A0033237E /* LaunchScreen.storyboard */,
 				75959E0520DA389A0033237E /* Info.plist */,
-				75959E0B20DA395A0033237E /* YYPlayerView.swift */,
 			);
 			path = YYPlayer;
+			sourceTree = "<group>";
+		};
+		CFAE38BE0307EF54C165E6D2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C4CE5D7417850590D0AC4D76 /* Pods-YYPlayer.debug.xcconfig */,
+				9FFC5D23CCBCB348A09452EE /* Pods-YYPlayer.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +102,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 75959E0820DA389A0033237E /* Build configuration list for PBXNativeTarget "YYPlayer" */;
 			buildPhases = (
+				0FCCED812ED72A5E15773220 /* [CP] Check Pods Manifest.lock */,
 				75959DF220DA38980033237E /* Sources */,
 				75959DF320DA38980033237E /* Frameworks */,
 				75959DF420DA38980033237E /* Resources */,
+				D8D86E52615C93E60145D591 /* [CP] Embed Pods Frameworks */,
+				C2654F43E299BB39A4E13C16 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -132,6 +163,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0FCCED812ED72A5E15773220 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YYPlayer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C2654F43E299BB39A4E13C16 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YYPlayer/Pods-YYPlayer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8D86E52615C93E60145D591 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-YYPlayer/Pods-YYPlayer-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YYPlayer/Pods-YYPlayer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		75959DF220DA38980033237E /* Sources */ = {
@@ -282,6 +367,7 @@
 		};
 		75959E0920DA389A0033237E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4CE5D7417850590D0AC4D76 /* Pods-YYPlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +386,7 @@
 		};
 		75959E0A20DA389A0033237E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FFC5D23CCBCB348A09452EE /* Pods-YYPlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
