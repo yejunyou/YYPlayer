@@ -19,9 +19,14 @@ class YYPlayerView: UIView {
 
     weak var delegate: YYPlayerViewDelegate?
     public var playerLayer: AVPlayerLayer?
-    var isSliding: Bool  = true
+    public var isSliding: Bool  = true
     
     override func awakeFromNib() {
+        
+        addSubview(timeLabel)
+        addSubview(slider)
+        addSubview(progressView)
+        
         slider.addTarget(self, action: #selector(sliderTouchDown(_:)), for: .touchDown)
         slider.addTarget(self, action: #selector(sliderTouchUpOut(_:)), for: .touchUpOutside)
         slider.addTarget(self, action: #selector(sliderTouchUpOut(_:)), for: .touchUpInside)
@@ -33,7 +38,6 @@ class YYPlayerView: UIView {
     }
     
     @objc func sliderTouchUpOut(_ slider: UISlider) {
-        // YYTODO: 代理处理
         delegate?.yyplayer(self, sliderTouchUpOut: slider)
     }
     
@@ -42,8 +46,6 @@ class YYPlayerView: UIView {
         
         playerLayer?.frame = self.bounds
         
-        addSubview(timeLabel)
-        addSubview(slider)
         
         timeLabel.snp.makeConstraints { (make) in
             make.right.equalTo(self).inset(5)
@@ -55,6 +57,11 @@ class YYPlayerView: UIView {
             make.left.equalTo(self).offset(50)
             make.right.equalTo(self).inset(100)
             make.height.equalTo(15)
+        }
+        
+        progressView.snp.makeConstraints { (make) in
+            make.left.right.centerY.equalTo(slider)
+            make.height.equalTo(2)
         }
     }
 
@@ -75,4 +82,12 @@ class YYPlayerView: UIView {
         s.setThumbImage(UIImage.init(named: "Artboard"), for: .normal)
         return s
     } ()
+    
+    public lazy var progressView: UIProgressView = {
+        let p = UIProgressView.init()
+        p.tintColor = UIColor.red
+        p.progress = 0
+        return p
+    } ()
+        
 }

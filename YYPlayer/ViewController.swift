@@ -88,7 +88,12 @@ class ViewController: UIViewController {
         guard let playserItem = object as? AVPlayerItem else {return}
         
         if keyPath == "loadedTimeRanges" {
-            // 缓冲进度 暂不处理
+            // 通过监听AVPlayerItem的"loadedTimeRanges"，可以实时知道当前视频的进度缓冲
+            let loadTime = avalableDurationWithPlayerItem()
+            let totalTime = CMTimeGetSeconds(playserItem.duration)
+            let percent = loadTime/totalTime
+            playerView.progressView.progress = Float(percent)
+            
         }else if keyPath == "status" { // unknown/readyToPlay/failed
             if playserItem.status == .readyToPlay {
                 self.avplayer.play()
@@ -96,6 +101,16 @@ class ViewController: UIViewController {
                 print("加载异常!")
             }
         }
+    }
+    
+    /// 计算当前的缓冲进度
+    func avalableDurationWithPlayerItem() -> TimeInterval {
+        guard let loadedTimeRanges = avplayer?.currentItem?.loadedTimeRanges,let first = loadedTimeRanges.first else {fatalError()}
+        let timeRange = first.timeRangeValue
+        let startSeconds = CMTimeGetSeconds(timeRange.start)
+        let durationSecound = CMTimeGetSeconds(timeRange.duration)
+        let result = startSeconds + durationSecound
+        return result
     }
 }
 
