@@ -54,6 +54,10 @@ class ViewController: UIViewController {
     }
     
     @objc func update() -> Void {
+        if playerView.isPlaying == false {
+            return
+        }
+        
         let currentTime = CMTimeGetSeconds(self.avplayer.currentTime())
         let totalTime = TimeInterval.init(playerItem.duration.value)/TimeInterval.init(playerItem.duration.timescale)
         
@@ -127,6 +131,16 @@ extension ViewController: YYPlayerViewDelegate {
             // 指定视频位置
             self.avplayer.seek(to: seekTime) { (b) in
                 player.isSliding = false
+            }
+        }
+    }
+    
+    func yyplayer(_ player: YYPlayerView, playOrPause playButton: UIButton) {
+        if playerView.isPlaying == false {
+            avplayer.pause()
+        } else {
+            if avplayer.status == .readyToPlay {
+                avplayer.play()
             }
         }
     }
